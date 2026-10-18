@@ -7,6 +7,7 @@
 <meta name="description" content="REDNEON STORE ร้านขายไอดีเกมออนไลน์ ตรวจสอบก่อนส่ง รับประกันหลังการขาย">
 <title>REDNEON STORE - ร้านขายไอดีเกมออนไลน์</title>
 <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;800&display=swap" rel="stylesheet">
 <script>
 tailwind.config={theme:{extend:{colors:{neonRed:'#ff0055',darkBg:'#0a0a0c',cardBg:'#121216',cardBorder:'#26262e'},fontFamily:{prompt:['Prompt','Noto Sans Thai','sans-serif']}}}}
@@ -32,6 +33,10 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 ::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:#0a0a0c}::-webkit-scrollbar-thumb{background:#26262e;border-radius:4px}::-webkit-scrollbar-thumb:hover{background:#ff0055}
 :focus-visible{outline:2px solid var(--neon);outline-offset:2px}
 .inp{width:100%;background:#0a0a0c;border:1px solid var(--line);border-radius:.5rem;padding:.6rem .8rem;color:#fff}.inp::placeholder{color:#6b7280}
+.mb{padding:.6rem 1.25rem;border-radius:.75rem;font-weight:700;color:#fff;border:1px solid transparent;background:linear-gradient(#0a0a0c,#0a0a0c) padding-box,linear-gradient(135deg,#ff0055,#ff8a00 50%,#ff0055) border-box;box-shadow:0 0 12px rgba(255,0,85,.45);transition:.2s}
+.mb:hover{box-shadow:0 0 22px rgba(255,0,85,.85);transform:translateY(-1px)}
+.mb.f{background:linear-gradient(#ff0055,#ff0055) padding-box,linear-gradient(135deg,#ff0055,#ff8a00 50%,#ff0055) border-box;color:#000}
+.in [data-guest],.nosb [data-guest],.nosb [data-me],body:not(.in) [data-me]{display:none!important}
 </style>
 </head>
 <body>
@@ -46,6 +51,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 <symbol id="i-game" viewBox="0 0 24 24"><line x1="6" x2="10" y1="12" y2="12"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="15" x2="15.01" y1="13" y2="13"/><line x1="18" x2="18.01" y1="11" y2="11"/><rect width="20" height="12" x="2" y="6" rx="2"/></symbol>
 <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
 <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
 </svg>
 
 <header class="sticky z-50 bg-black/80 backdrop-blur-md border-b border-neonRed/30" style="top:env(safe-area-inset-top,0px)">
@@ -62,12 +68,14 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
     </nav>
     <div class="flex items-center gap-2">
       <button id="admBtn" class="hidden px-3 h-10 rounded-lg border border-neonRed text-sm font-semibold text-neonRed">จัดการร้าน</button>
+      <div class="hidden sm:flex items-center gap-2" data-guest><button data-acc="up" class="mb f text-sm">สมัครสมาชิก</button><button data-acc="in" class="mb text-sm">เข้าสู่ระบบ</button></div>
+      <button data-acc="me" data-me class="hidden sm:inline-block mb text-sm max-w-[9rem] truncate"><span class="uname"></span></button>
       <button id="cartBtn" class="relative w-10 h-10 grid place-items-center rounded-lg border border-neonRed/50 text-lg" aria-label="เปิดตะกร้า"><svg class="ic"><use href="#i-cart"/></svg><span id="cnt" class="absolute -top-1.5 -right-1.5 min-w-[1.25rem] h-5 px-1 rounded-full bg-neonRed text-black text-xs font-bold grid place-items-center">0</span></button>
       <button id="menuBtn" class="md:hidden w-10 h-10 grid place-items-center rounded-lg border border-white/20 text-lg" aria-label="เมนู"><svg class="ic"><use href="#i-menu"/></svg></button>
     </div>
   </div>
   <nav id="mnav" class="hidden flex-col md:hidden border-t border-white/10 px-4 py-2 text-gray-200">
-    <a href="#shop" class="py-3">เลือกซื้อสินค้า</a><a href="#why" class="py-3">ทำไมต้องเรา</a><a href="#contact" class="py-3">ติดต่อเรา</a>
+    <a href="#shop" class="py-3">เลือกซื้อสินค้า</a><a href="#why" class="py-3">ทำไมต้องเรา</a><a href="#contact" class="py-3">ติดต่อเรา</a><button data-acc="up" data-guest class="py-3 text-left">สมัครสมาชิก</button><button data-acc="in" data-guest class="py-3 text-left">เข้าสู่ระบบ</button><button data-acc="me" data-me class="py-3 text-left">บัญชี: <span class="uname"></span></button>
   </nav>
 </header>
 
@@ -80,6 +88,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
       <a href="#shop" class="btn"><svg class="ic"><use href="#i-game"/></svg>เลือกซื้อสินค้า</a>
       <a href="#why" class="btn o">ทำไมต้องเรา</a>
     </div>
+    <div class="mt-5 flex justify-center gap-3" data-guest><button data-acc="up" class="mb f">สมัครสมาชิก</button><button data-acc="in" class="mb">เข้าสู่ระบบ</button></div>
+    <div class="mt-5 flex justify-center" data-me><button data-acc="me" class="mb max-w-full truncate">สวัสดี <span class="uname"></span></button></div>
   </section>
 
   <section id="shop" class="max-w-7xl mx-auto px-4 py-12">
@@ -123,6 +133,22 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   <h3 class="font-semibold mt-6 mb-1">สินค้าทั้งหมด</h3><div id="alist" class="pb-8"></div>
  </div>
 </div>
+<div id="auth" class="fixed inset-0 z-[88] bg-black/80 hidden overflow-y-auto st sb">
+ <div class="max-w-sm mx-auto mt-6 px-4">
+  <div class="bg-cardBg border border-neonRed/40 rounded-xl p-5">
+   <div class="flex items-center justify-between mb-4"><h2 id="atitle" class="text-xl font-bold">สมัครสมาชิก</h2><button id="aclose" class="w-9 h-9 grid place-items-center" aria-label="ปิด"><svg class="ic"><use href="#i-x"/></svg></button></div>
+   <div class="grid gap-2">
+    <input id="a-name" class="inp" placeholder="ชื่อผู้ใช้ (ตั้งเอง 3–20 ตัว)" maxlength="20" autocomplete="username">
+    <input id="a-mail" class="inp" type="email" placeholder="อีเมล" autocomplete="email">
+    <input id="a-pw" class="inp" type="password" placeholder="รหัสผ่าน (อย่างน้อย 8 ตัว)" autocomplete="new-password">
+    <input id="a-pw2" class="inp" type="password" placeholder="ยืนยันรหัสผ่าน" autocomplete="new-password">
+    <p id="amsg" class="text-sm text-neonRed min-h-[1.25rem]"></p>
+    <button id="asub" class="btn justify-center">สมัครสมาชิก</button>
+    <button id="aswap" class="text-sm text-gray-400 underline py-1">มีบัญชีแล้ว? เข้าสู่ระบบ</button>
+   </div>
+  </div>
+ </div>
+</div>
 <div id="toast" class="fixed left-1/2 -translate-x-1/2 z-[90] bg-neonRed text-black font-semibold px-5 py-2 rounded-full hidden" style="bottom:calc(env(safe-area-inset-bottom,0px) + 1.5rem)"></div>
 
 <script>
@@ -160,7 +186,7 @@ if(t.dataset.add){cart.push(t.dataset.add);draw();toast('เพิ่มลง�
 if(t.dataset.rm){cart=cart.filter(i=>i!=t.dataset.rm);draw()}});
 $('#cartBtn').onclick=()=>open(1);$('#cls').onclick=$('#ov').onclick=()=>open(0);
 $('#menuBtn').onclick=()=>$('#mnav').classList.toggle('hidden');$('#mnav').onclick=()=>$('#mnav').classList.add('hidden');
-$('#pay').onclick=async()=>{const it=cart.map(i=>P.find(x=>x.id==i)).filter(Boolean),txt='สั่งซื้อไอดี:\n'+it.map(x=>'- '+x.raw.n+' ('+x.raw.g+') '+fmt(x.p)).join('\n')+'\nรวม '+fmt(it.reduce((s,x)=>s+x.p,0));
+$('#pay').onclick=async()=>{const it=cart.map(i=>P.find(x=>x.id==i)).filter(Boolean),txt=(me?'ชื่อสมาชิก: '+uname()+'\n':'')+'สั่งซื้อไอดี:\n'+it.map(x=>'- '+x.raw.n+' ('+x.raw.g+') '+fmt(x.p)).join('\n')+'\nรวม '+fmt(it.reduce((s,x)=>s+x.p,0));
 try{await navigator.clipboard.writeText(txt)}catch(e){$('#items').innerHTML='<p class="text-sm text-gray-400 my-3">คัดลอกข้อความนี้ส่งให้แอดมินทางดิสคอร์ด</p><textarea readonly rows="8" class="inp">'+esc(txt)+'</textarea>';return}
 cart=[];draw();open(0);toast('คัดลอกรายการแล้ว นำไปส่งให้แอดมินทางดิสคอร์ดได้เลย');$('#contact').scrollIntoView({behavior:'smooth'})};
 const A=$('#adm'),$v=k=>$('#'+k).value;
@@ -184,6 +210,36 @@ else if(t.dataset.arm)await db.collection('products').doc(id).delete();
 else{t.dataset.arm=1;t.textContent='ยืนยันลบ';t.className='text-xs px-2 py-1 bg-neonRed text-black rounded'}}catch(e){toast('ทำรายการไม่สำเร็จ')}};
 refresh();
 applyCfg();
+const SB_URL='https://rpwsleluxqghejqyyzdv.supabase.co',SB_KEY='sb_publishable_5MyHNPm1UM9ZCnqWmUpa9g_-xQARKg-';
+let sb=null,me=null,mode='up';
+try{if(SB_URL&&SB_KEY)sb=supabase.createClient(SB_URL,SB_KEY)}catch(e){}
+const uname=()=>me?.user_metadata?.username||(me?.email||'').split('@')[0],F=['a-name','a-mail','a-pw','a-pw2'].map(k=>$('#'+k)),th=s=>/already/i.test(s)?'อีเมลนี้สมัครไปแล้ว':/invalid login/i.test(s)?'อีเมลหรือรหัสผ่านไม่ถูกต้อง':/rate limit/i.test(s)?'ลองใหม่อีกครั้งในอีกสักครู่':'ทำรายการไม่สำเร็จ ลองใหม่อีกครั้ง';
+function accUI(){document.body.classList.toggle('in',!!me);document.querySelectorAll('.uname').forEach(e=>e.textContent=me?uname():'')}
+function amode(m){mode=m;const up=m=='up',my=m=='me';
+$('#atitle').textContent=up?'สมัครสมาชิก':my?'บัญชีของคุณ':'เข้าสู่ระบบ';
+F[0].style.display=up?'':'none';F[1].style.display=F[2].style.display=my?'none':'';F[3].style.display=up?'':'none';
+$('#asub').textContent=up?'สมัครสมาชิก':my?'ออกจากระบบ':'เข้าสู่ระบบ';
+$('#aswap').style.display=my?'none':'';$('#aswap').textContent=up?'มีบัญชีแล้ว? เข้าสู่ระบบ':'ยังไม่มีบัญชี? สมัครสมาชิก';
+$('#amsg').textContent=my?'สวัสดี '+uname()+' ('+(me.email||'')+')':''}
+const ao=(v,m)=>{$('#auth').classList.toggle('hidden',!v);if(v)amode(me?'me':(m||'up'))};
+document.querySelectorAll('[data-acc]').forEach(b=>b.onclick=()=>ao(1,b.dataset.acc));$('#aclose').onclick=()=>ao(0);$('#aswap').onclick=()=>amode(mode=='up'?'in':'up');
+$('#asub').onclick=async()=>{const m=$('#amsg');m.textContent='';
+if(!sb)return m.textContent='ระบบสมาชิกยังไม่เปิดใช้งาน';
+const name=F[0].value.trim(),mail=F[1].value.trim(),pw=F[2].value;
+try{
+if(mode=='me'){await sb.auth.signOut();ao(0);return toast('ออกจากระบบแล้ว')}
+if(mode=='up'){
+if(!/^[\w\u0E00-\u0E7F-]{3,20}$/.test(name))return m.textContent='ชื่อผู้ใช้ 3–20 ตัว ใช้ตัวอักษร ตัวเลข _ หรือ - ได้';
+if(!/^\S+@\S+\.\S+$/.test(mail))return m.textContent='กรอกอีเมลให้ถูกต้อง';
+if(pw.length<8)return m.textContent='รหัสผ่านต้องมีอย่างน้อย 8 ตัว';
+if(pw!==F[3].value)return m.textContent='รหัสผ่านทั้งสองช่องไม่ตรงกัน';
+const{data,error}=await sb.auth.signUp({email:mail,password:pw,options:{data:{username:name}}});
+if(error)throw error;
+if(!data.session)return m.textContent='สมัครแล้ว กรุณายืนยันอีเมลก่อนเข้าสู่ระบบ'
+}else{const{error}=await sb.auth.signInWithPassword({email:mail,password:pw});if(error)throw error}
+F.forEach(x=>x.value='');ao(0);toast('ยินดีต้อนรับ')
+}catch(e){m.textContent=th(String(e.message))}};
+if(sb){sb.auth.getSession().then(({data})=>{me=data.session?.user||null;accUI()});sb.auth.onAuthStateChange((_e,s)=>{me=s?.user||null;accUI()})}else document.body.classList.add('nosb');
 (async()=>{try{const u=await claude.use('user');db=await claude.use('db');if(!db)return;
 if(u&&await u.canEdit()){adm=true;$('#admBtn').classList.remove('hidden')}
 db.collection('products').onSnapshot(s=>{P=s.docs.map(d=>mk(d.data(),d.id)).sort((a,b)=>b.o-a.o);refresh()},()=>{});
