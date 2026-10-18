@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E🎮%3C/text%3E%3C/svg%3E">
+<meta name="description" content="REDNEON STORE ร้านขายไอดีเกมออนไลน์ ตรวจสอบก่อนส่ง รับประกันหลังการขาย">
+<title>REDNEON STORE - ร้านขายไอดีเกมออนไลน์</title>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;800&display=swap" rel="stylesheet">
+<script>
+tailwind.config={theme:{extend:{colors:{neonRed:'#ff0055',darkBg:'#0a0a0c',cardBg:'#121216',cardBorder:'#26262e'},fontFamily:{prompt:['Prompt','Noto Sans Thai','sans-serif']}}}}
+</script>
+<style>
+:root{--bg:#0a0a0c;--card:#121216;--line:#26262e;--neon:#ff0055;--tx:#fff;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 72px);scroll-behavior:smooth}
+body{font-family:'Prompt','Noto Sans Thai',system-ui,sans-serif;background:var(--bg);color:var(--tx);background-image:radial-gradient(circle at 50% 0%,rgba(255,0,85,.15),transparent 40%),radial-gradient(circle at 100% 100%,rgba(255,0,85,.05),transparent 30%);background-attachment:fixed;min-height:100vh}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:rgba(0,0,0,.85);backdrop-filter:blur(8px)}
+.ic{width:1.1em;height:1.1em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.15em}
+.glow{box-shadow:0 0 15px rgba(255,0,85,.6)}
+.ntext{text-shadow:0 0 8px rgba(255,0,85,.9),0 0 22px rgba(255,0,85,.5)}
+.card{background:var(--card);border:1px solid var(--line);transition:transform .25s,box-shadow .25s,border-color .25s}
+.card:hover{transform:translateY(-4px);box-shadow:0 10px 20px rgba(255,0,85,.3);border-color:var(--neon)}
+.chip{padding:.4rem 1rem;border-radius:9999px;border:1px solid var(--line);color:#d1d5db;font-size:.875rem;transition:.2s}
+.chip.on,.chip:hover{border-color:var(--neon);color:#fff;background:rgba(255,0,85,.15)}
+.add{display:inline-flex;gap:.4rem;align-items:center;background:var(--neon);color:#000;font-weight:700;font-size:.875rem;padding:.45rem .9rem;border-radius:.5rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;border-radius:.75rem;font-weight:700;background:var(--neon);color:#000;box-shadow:0 0 15px rgba(255,0,85,.6)}
+.btn.o{background:transparent;color:#fff;border:1px solid var(--neon);box-shadow:none}
+.btn:disabled{opacity:.4;box-shadow:none}
+.st{padding-top:calc(env(safe-area-inset-top,0px) + 1rem)}
+.sb{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 1rem)}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:#0a0a0c}::-webkit-scrollbar-thumb{background:#26262e;border-radius:4px}::-webkit-scrollbar-thumb:hover{background:#ff0055}
+:focus-visible{outline:2px solid var(--neon);outline-offset:2px}
+.inp{width:100%;background:#0a0a0c;border:1px solid var(--line);border-radius:.5rem;padding:.6rem .8rem;color:#fff}.inp::placeholder{color:#6b7280}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2m-9 0 1 14h8l1-14"/></symbol>
+<symbol id="i-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="i-headset" viewBox="0 0 24 24"><path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z"/><path d="M21 16v2a4 4 0 0 1-4 4h-5"/></symbol>
+<symbol id="i-game" viewBox="0 0 24 24"><line x1="6" x2="10" y1="12" y2="12"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="15" x2="15.01" y1="13" y2="13"/><line x1="18" x2="18.01" y1="11" y2="11"/><rect width="20" height="12" x="2" y="6" rx="2"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+</svg>
+
+<header class="sticky z-50 bg-black/80 backdrop-blur-md border-b border-neonRed/30" style="top:env(safe-area-inset-top,0px)">
+  <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+    <a href="#home" class="flex items-center gap-3">
+      <span class="w-10 h-10 bg-neonRed rounded-lg grid place-items-center font-extrabold text-black glow -rotate-3">RN</span>
+      <span class="text-xl font-extrabold tracking-wider">RED<span class="text-neonRed ntext">NEON</span></span>
+    </a>
+    <nav class="hidden md:flex items-center gap-8 text-gray-300 font-medium">
+      <a href="#home" class="hover:text-neonRed transition">หน้าแรก</a>
+      <a href="#shop" class="hover:text-neonRed transition">เลือกซื้อสินค้า</a>
+      <a href="#why" class="hover:text-neonRed transition">ทำไมต้องเรา</a>
+      <a href="#contact" class="hover:text-neonRed transition">ติดต่อเรา</a>
+    </nav>
+    <div class="flex items-center gap-2">
+      <button id="admBtn" class="hidden px-3 h-10 rounded-lg border border-neonRed text-sm font-semibold text-neonRed">จัดการร้าน</button>
+      <button id="cartBtn" class="relative w-10 h-10 grid place-items-center rounded-lg border border-neonRed/50 text-lg" aria-label="เปิดตะกร้า"><svg class="ic"><use href="#i-cart"/></svg><span id="cnt" class="absolute -top-1.5 -right-1.5 min-w-[1.25rem] h-5 px-1 rounded-full bg-neonRed text-black text-xs font-bold grid place-items-center">0</span></button>
+      <button id="menuBtn" class="md:hidden w-10 h-10 grid place-items-center rounded-lg border border-white/20 text-lg" aria-label="เมนู"><svg class="ic"><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+  <nav id="mnav" class="hidden flex-col md:hidden border-t border-white/10 px-4 py-2 text-gray-200">
+    <a href="#shop" class="py-3">เลือกซื้อสินค้า</a><a href="#why" class="py-3">ทำไมต้องเรา</a><a href="#contact" class="py-3">ติดต่อเรา</a>
+  </nav>
+</header>
+
+<div id="notice" class="hidden text-center text-sm py-2 px-4 bg-neonRed/15 border-b border-neonRed/30"></div>
+<main>
+  <section id="home" class="max-w-4xl mx-auto px-4 pt-20 pb-16 text-center">
+    <h1 class="text-4xl sm:text-6xl font-extrabold leading-tight ntext">ยินดีต้อนรับเข้าสู่<br>REDNEON STORE</h1>
+    <p class="mt-5 text-gray-400 max-w-xl mx-auto">ทุกไอดีผ่านการตรวจสอบก่อนส่ง เปลี่ยนข้อมูลได้ พร้อมรับประกันหลังการขาย</p>
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <a href="#shop" class="btn"><svg class="ic"><use href="#i-game"/></svg>เลือกซื้อสินค้า</a>
+      <a href="#why" class="btn o">ทำไมต้องเรา</a>
+    </div>
+  </section>
+
+  <section id="shop" class="max-w-7xl mx-auto px-4 py-12">
+    <h2 class="text-2xl sm:text-3xl font-bold">ไอดีมาใหม่</h2>
+    <div id="chips" class="flex flex-wrap gap-2 my-5"></div>
+    <div id="grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+  </section>
+
+  <section id="why" class="max-w-7xl mx-auto px-4 py-12">
+    <h2 class="text-2xl sm:text-3xl font-bold mb-6">ทำไมต้องซื้อกับเรา</h2>
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="card rounded-xl p-6"><div class="text-neonRed text-3xl mb-3"><svg class="ic"><use href="#i-shield"/></svg></div><h3 class="font-semibold text-lg">ปลอดภัย มีรับประกัน</h3><p class="text-gray-400 text-sm mt-2">ตรวจไอดีก่อนส่งทุกครั้ง หากมีปัญหาแอดมินแก้ไขให้ภายใน 7 วัน</p></div>
+      <div class="card rounded-xl p-6"><div class="text-neonRed text-3xl mb-3"><svg class="ic"><use href="#i-zap"/></svg></div><h3 class="font-semibold text-lg">ส่งไอดีไว</h3><p class="text-gray-400 text-sm mt-2">ชำระเงินแล้วรับข้อมูลไอดีทันที ไม่ต้องรอนาน</p></div>
+      <div class="card rounded-xl p-6"><div class="text-neonRed text-3xl mb-3"><svg class="ic"><use href="#i-headset"/></svg></div><h3 class="font-semibold text-lg">แอดมินดูแลตลอด</h3><p class="text-gray-400 text-sm mt-2">ทักถามได้ทุกวันทั้งก่อนและหลังซื้อ ตอบเร็วทุกช่องทาง</p></div>
+    </div>
+  </section>
+</main>
+
+<footer id="contact" class="border-t border-neonRed/30 bg-black/60 mt-8">
+  <div class="max-w-7xl mx-auto px-4 py-10 flex flex-col sm:flex-row gap-6 justify-between sm:items-center">
+    <div><div class="text-xl font-extrabold tracking-wider">RED<span class="text-neonRed">NEON</span> STORE</div><p class="text-gray-400 text-sm mt-1">ร้านขายไอดีเกมออนไลน์ เปิดทุกวัน 10:00–24:00 น.</p></div>
+    <a id="dc" href="#" style="display:none" target="_blank" rel="noopener" class="btn self-start"><svg class="ic"><use href="#i-chat"/></svg>เข้าดิสคอร์ดร้าน</a>
+  </div>
+  <p class="text-center text-gray-500 text-xs pb-6">© 2026 REDNEON STORE สงวนลิขสิทธิ์</p>
+</footer>
+
+<div id="ov" class="fixed inset-0 bg-black/70 z-[70] hidden"></div>
+<aside id="dr" class="fixed right-0 top-0 bottom-0 w-full max-w-sm bg-cardBg border-l border-neonRed/40 z-[80] translate-x-full transition-transform duration-300 flex flex-col st sb" aria-label="ตะกร้าสินค้า">
+  <div class="flex items-center justify-between px-4 pb-3 border-b border-white/10"><h2 class="text-lg font-bold">ตะกร้าสินค้า</h2><button id="cls" class="w-9 h-9 grid place-items-center" aria-label="ปิด"><svg class="ic"><use href="#i-x"/></svg></button></div>
+  <div id="items" class="flex-1 overflow-y-auto px-4"></div>
+  <div class="px-4 pt-4 border-t border-white/10"><div class="flex justify-between mb-3"><span class="text-gray-400">ยอดรวม</span><b id="tot" class="text-neonRed text-xl">฿0</b></div><button id="pay" class="btn w-full justify-center">สั่งซื้อ</button></div>
+</aside>
+<div id="adm" class="fixed inset-0 z-[85] bg-darkBg overflow-y-auto hidden st sb">
+ <div class="max-w-3xl mx-auto px-4">
+  <div class="flex items-center justify-between pb-3 border-b border-white/10"><h2 class="text-xl font-bold">จัดการร้าน</h2><button id="acls" class="w-9 h-9 grid place-items-center" aria-label="ปิด"><svg class="ic"><use href="#i-x"/></svg></button></div>
+  <h3 class="font-semibold mt-5 mb-2">ตั้งค่าร้าน</h3>
+  <div class="grid gap-2"><input id="c-dc" class="inp" placeholder="ลิงก์เชิญดิสคอร์ดของร้าน (https://discord.gg/...)"><input id="c-notice" class="inp" placeholder="ประกาศหน้าร้าน (เว้นว่างเพื่อซ่อน)"><button id="csave" class="btn justify-center">บันทึกการตั้งค่า</button></div>
+  <h3 id="ptitle" class="font-semibold mt-6 mb-2">เพิ่มไอดีใหม่</h3>
+  <div class="grid gap-2"><input id="f-n" class="inp" placeholder="ชื่อสินค้า"><input id="f-g" class="inp" list="gl" placeholder="เกม (เช่น Valorant)"><datalist id="gl"></datalist><input id="f-d" class="inp" placeholder="รายละเอียดสั้น ๆ"><input id="f-p" class="inp" type="number" min="0" inputmode="numeric" placeholder="ราคา (บาท)">
+   <div class="flex gap-2"><button id="psave" class="btn flex-1 justify-center">บันทึกสินค้า</button><button id="pclr" class="btn o">ล้างฟอร์ม</button></div></div>
+  <h3 class="font-semibold mt-6 mb-1">สินค้าทั้งหมด</h3><div id="alist" class="pb-8"></div>
+ </div>
+</div>
+<div id="toast" class="fixed left-1/2 -translate-x-1/2 z-[90] bg-neonRed text-black font-semibold px-5 py-2 rounded-full hidden" style="bottom:calc(env(safe-area-inset-bottom,0px) + 1.5rem)"></div>
+
+<script>
+const $=s=>document.querySelector(s),ic=n=>`<svg class="ic"><use href="#i-${n}"/></svg>`,fmt=n=>'฿'+n.toLocaleString('th-TH');
+const C={Valorant:'#ff0055',RoV:'#3b82f6','Free Fire':'#f97316',Genshin:'#a855f7'};
+const SEED=[
+{id:1,g:'Valorant',n:'ไอดีแรงค์ Immortal',d:'สกิน 25+ ชิ้น เอเจนต์ครบ',p:1290},
+{id:2,g:'Valorant',n:'ไอดี Ascendant',d:'สกิน 8 ชิ้น เปลี่ยนเมลได้',p:590},
+{id:3,g:'RoV',n:'ไอดีแรงค์ Conqueror',d:'ฮีโร่ 90+ สกินแรร์ 12 ตัว',p:890},
+{id:4,g:'RoV',n:'ไอดีเริ่มต้นสายฟาร์ม',d:'ฮีโร่ 40+ รูนเต็ม',p:190},
+{id:5,g:'Free Fire',n:'ไอดี Grandmaster',d:'ตัวละครครบ ปืนอัปเกรด',p:750},
+{id:6,g:'Free Fire',n:'ไอดีสกินหายาก',d:'บันเดิลหายาก 15 ชิ้น',p:1590},
+{id:7,g:'Genshin',n:'ไอดี AR 60 ตัวท็อป',d:'5★ หลายตัว อาวุธเสริมพร้อม',p:3490},
+{id:8,g:'Genshin',n:'ไอดีเริ่มเล่น AR 45',d:'5★ 3 ตัว พร้อมเล่นต่อ',p:1190}];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>'&#'+c.charCodeAt(0)+';'),col=g=>Object.hasOwn(C,g)?C[g]:'#ff0055';
+const mk=(v,id)=>{const g=String(v.g||'อื่นๆ');return{id:String(id),g:esc(g),n:esc(v.n),d:esc(v.d),p:+v.p||0,sold:!!v.sold,o:+v.o||0,raw:{g,n:String(v.n??''),d:String(v.d??''),p:+v.p||0}}};
+let P=SEED.map(v=>mk(v,v.id)),db=null,adm=false,cfg={};const DC='https://discord.gg/uYufFV7Nm';
+const games=()=>['ทั้งหมด',...new Set(P.map(x=>x.raw.g))];
+let f='ทั้งหมด',cart=[],tm;
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.remove('hidden');clearTimeout(tm);tm=setTimeout(()=>t.classList.add('hidden'),1800)};
+const open=v=>{$('#dr').classList.toggle('translate-x-full',!v);$('#ov').classList.toggle('hidden',!v)};
+const chips=()=>$('#chips').innerHTML=games().map(g=>`<button data-g="${esc(g)}" class="chip ${g==f?'on':''}">${esc(g)}</button>`).join('');
+const grid=()=>$('#grid').innerHTML=P.filter(x=>f=='ทั้งหมด'||x.raw.g==f).map(x=>`<article class="card rounded-xl overflow-hidden flex flex-col">
+<div class="h-28 grid place-items-center text-4xl" style="background:linear-gradient(135deg,${col(x.raw.g)}66,#0a0a0c);color:${col(x.raw.g)}">${ic('game')}</div>
+<div class="p-4 flex flex-col gap-1 flex-1"><span class="text-xs font-semibold" style="color:${col(x.raw.g)}">${x.g}</span><h3 class="font-semibold">${x.n}</h3><p class="text-sm text-gray-400 flex-1">${x.d}</p>
+<div class="flex items-center justify-between mt-3"><b class="text-xl text-neonRed">${fmt(x.p)}</b>${x.sold?'<span class="text-sm text-gray-500">ขายแล้ว</span>':cart.includes(x.id)?`<span class="text-sm text-green-400">${ic('check')} ในตะกร้า</span>`:`<button data-add="${x.id}" class="add">${ic('cart')} ใส่ตะกร้า</button>`}</div></div></article>`).join('')||'<p class="text-gray-500 col-span-full">ยังไม่มีสินค้าในขณะนี้</p>';
+function draw(){
+const it=cart.map(i=>P.find(x=>x.id==i)).filter(Boolean),t=it.reduce((s,x)=>s+x.p,0);
+$('#cnt').textContent=cart.length;$('#tot').textContent=fmt(t);$('#pay').disabled=!cart.length;
+$('#items').innerHTML=it.length?it.map(x=>`<div class="flex items-center gap-3 py-3 border-b border-white/10"><div class="flex-1"><div class="text-sm font-semibold">${x.n}</div><div class="text-xs text-gray-400">${x.g} · ${fmt(x.p)}</div></div><button data-rm="${x.id}" class="text-gray-400 hover:text-neonRed p-2" aria-label="ลบ">${ic('trash')}</button></div>`).join(''):'<p class="text-gray-500 text-center mt-10">ตะกร้ายังว่างอยู่ เลือกไอดีที่ชอบได้เลย</p>';
+grid()}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-g],[data-add],[data-rm]');if(!t)return;
+if(t.dataset.g){f=t.dataset.g;chips();grid()}
+if(t.dataset.add){cart.push(t.dataset.add);draw();toast('เพิ่มลงตะกร้าแล้ว')}
+if(t.dataset.rm){cart=cart.filter(i=>i!=t.dataset.rm);draw()}});
+$('#cartBtn').onclick=()=>open(1);$('#cls').onclick=$('#ov').onclick=()=>open(0);
+$('#menuBtn').onclick=()=>$('#mnav').classList.toggle('hidden');$('#mnav').onclick=()=>$('#mnav').classList.add('hidden');
+$('#pay').onclick=async()=>{const it=cart.map(i=>P.find(x=>x.id==i)).filter(Boolean),txt='สั่งซื้อไอดี:\n'+it.map(x=>'- '+x.raw.n+' ('+x.raw.g+') '+fmt(x.p)).join('\n')+'\nรวม '+fmt(it.reduce((s,x)=>s+x.p,0));
+try{await navigator.clipboard.writeText(txt)}catch(e){$('#items').innerHTML='<p class="text-sm text-gray-400 my-3">คัดลอกข้อความนี้ส่งให้แอดมินทางดิสคอร์ด</p><textarea readonly rows="8" class="inp">'+esc(txt)+'</textarea>';return}
+cart=[];draw();open(0);toast('คัดลอกรายการแล้ว นำไปส่งให้แอดมินทางดิสคอร์ดได้เลย');$('#contact').scrollIntoView({behavior:'smooth'})};
+const A=$('#adm'),$v=k=>$('#'+k).value;
+let eid=null;
+const clr=()=>{eid=null;['n','g','d','p'].forEach(k=>$('#f-'+k).value='');$('#ptitle').textContent='เพิ่มไอดีใหม่'};
+const fillCfg=()=>{$('#c-dc').value=cfg.dc||'';$('#c-notice').value=cfg.notice||''};
+function applyCfg(){const n=$('#notice');n.textContent=cfg.notice||'';n.classList.toggle('hidden',!cfg.notice);const a=$('#dc'),ok=/^https:\/\/(discord\.gg|discord\.com)\//.test(cfg.dc||DC);if(ok)a.href=cfg.dc||DC;a.style.display=ok?'':'none'}
+function admList(){if(!adm)return;$('#gl').innerHTML=games().slice(1).map(g=>`<option value="${esc(g)}">`).join('');
+$('#alist').innerHTML=P.map(x=>`<div class="flex items-center gap-2 py-2 border-b border-white/10"><div class="flex-1 min-w-0"><div class="text-sm font-semibold truncate">${x.n}</div><div class="text-xs text-gray-400">${x.g} · ${fmt(x.p)}${x.sold?' · ขายแล้ว':''}</div></div><button data-ed="${x.id}" class="text-xs px-2 py-1 border border-white/20 rounded">แก้ไข</button><button data-sd="${x.id}" class="text-xs px-2 py-1 border border-white/20 rounded">${x.sold?'เปิดขาย':'ขายแล้ว'}</button><button data-dl="${x.id}" class="text-xs px-2 py-1 border border-white/20 rounded text-gray-300">ลบ</button></div>`).join('')||'<p class="text-gray-500 text-sm py-3">ยังไม่มีสินค้า</p>'}
+function refresh(){if(!games().includes(f))f='ทั้งหมด';draw();chips();admList()}
+$('#psave').onclick=async()=>{const v={n:$v('f-n').trim(),g:$v('f-g').trim(),d:$v('f-d').trim(),p:+$v('f-p')},old=P.find(x=>x.id==eid);
+if(!v.n||!v.g||$v('f-p')===''||!(v.p>=0))return toast('กรอกชื่อ เกม และราคาให้ครบ');
+try{const c=db.collection('products'),ref=eid?c.doc(eid):c.doc();await ref.set({...v,sold:old?old.sold:false,o:old?old.o:Date.now()});toast('บันทึกแล้ว');clr()}catch(e){toast('บันทึกไม่สำเร็จ')}};
+$('#pclr').onclick=clr;
+$('#csave').onclick=async()=>{const dc=$v('c-dc').trim();if(dc&&!/^https:\/\/(discord\.gg|discord\.com)\//.test(dc))return toast('ลิงก์ต้องขึ้นต้นด้วย https://discord.gg/');try{await db.doc('shop/main').set({dc,notice:$v('c-notice').trim()});toast('บันทึกการตั้งค่าแล้ว')}catch(e){toast('บันทึกไม่สำเร็จ')}};
+$('#admBtn').onclick=()=>{fillCfg();A.classList.remove('hidden');admList()};$('#acls').onclick=()=>A.classList.add('hidden');
+$('#alist').onclick=async e=>{const t=e.target.closest('[data-ed],[data-sd],[data-dl]');if(!t)return;const id=t.dataset.ed||t.dataset.sd||t.dataset.dl,x=P.find(y=>y.id==id);if(!x)return;
+try{if(t.dataset.ed){eid=id;['n','g','d','p'].forEach(k=>$('#f-'+k).value=x.raw[k]);$('#ptitle').textContent='แก้ไขสินค้า';$('#f-n').focus()}
+else if(t.dataset.sd)await db.collection('products').doc(id).update({sold:!x.sold});
+else if(t.dataset.arm)await db.collection('products').doc(id).delete();
+else{t.dataset.arm=1;t.textContent='ยืนยันลบ';t.className='text-xs px-2 py-1 bg-neonRed text-black rounded'}}catch(e){toast('ทำรายการไม่สำเร็จ')}};
+refresh();
+applyCfg();
+(async()=>{try{const u=await claude.use('user');db=await claude.use('db');if(!db)return;
+if(u&&await u.canEdit()){adm=true;$('#admBtn').classList.remove('hidden')}
+db.collection('products').onSnapshot(s=>{P=s.docs.map(d=>mk(d.data(),d.id)).sort((a,b)=>b.o-a.o);refresh()},()=>{});
+db.doc('shop/main').onSnapshot(s=>{cfg=s.data()||{};applyCfg()},()=>{})}catch(e){}})();
+</script>
+</body>
+</html>
