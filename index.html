@@ -36,7 +36,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .mb{padding:.6rem 1.25rem;border-radius:.75rem;font-weight:700;color:#fff;border:1px solid transparent;background:linear-gradient(#0a0a0c,#0a0a0c) padding-box,linear-gradient(135deg,#ff0055,#ff8a00 50%,#ff0055) border-box;box-shadow:0 0 12px rgba(255,0,85,.45);transition:.2s}
 .mb:hover{box-shadow:0 0 22px rgba(255,0,85,.85);transform:translateY(-1px)}
 .mb.f{background:linear-gradient(#ff0055,#ff0055) padding-box,linear-gradient(135deg,#ff0055,#ff8a00 50%,#ff0055) border-box;color:#000}
-.in [data-guest],.nosb [data-guest],.nosb [data-me],body:not(.in) [data-me]{display:none!important}
+.in [data-guest],.nosb [data-guest],.nosb [data-me],body:not(.in) [data-me],.notop [data-top]{display:none!important}
 </style>
 </head>
 <body>
@@ -70,12 +70,13 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
       <button id="admBtn" class="hidden px-3 h-10 rounded-lg border border-neonRed text-sm font-semibold text-neonRed">จัดการร้าน</button>
       <div class="hidden sm:flex items-center gap-2" data-guest><button data-acc="up" class="mb f text-sm">สมัครสมาชิก</button><button data-acc="in" class="mb text-sm">เข้าสู่ระบบ</button></div>
       <button data-acc="me" data-me class="hidden sm:inline-block mb text-sm max-w-[9rem] truncate"><span class="uname"></span></button>
+      <button data-top data-me class="hidden sm:inline-block mb f text-sm">฿<span class="bal">0</span> เติมเงิน</button>
       <button id="cartBtn" class="relative w-10 h-10 grid place-items-center rounded-lg border border-neonRed/50 text-lg" aria-label="เปิดตะกร้า"><svg class="ic"><use href="#i-cart"/></svg><span id="cnt" class="absolute -top-1.5 -right-1.5 min-w-[1.25rem] h-5 px-1 rounded-full bg-neonRed text-black text-xs font-bold grid place-items-center">0</span></button>
       <button id="menuBtn" class="md:hidden w-10 h-10 grid place-items-center rounded-lg border border-white/20 text-lg" aria-label="เมนู"><svg class="ic"><use href="#i-menu"/></svg></button>
     </div>
   </div>
   <nav id="mnav" class="hidden flex-col md:hidden border-t border-white/10 px-4 py-2 text-gray-200">
-    <a href="#shop" class="py-3">เลือกซื้อสินค้า</a><a href="#why" class="py-3">ทำไมต้องเรา</a><a href="#contact" class="py-3">ติดต่อเรา</a><button data-acc="up" data-guest class="py-3 text-left">สมัครสมาชิก</button><button data-acc="in" data-guest class="py-3 text-left">เข้าสู่ระบบ</button><button data-acc="me" data-me class="py-3 text-left">บัญชี: <span class="uname"></span></button>
+    <a href="#shop" class="py-3">เลือกซื้อสินค้า</a><a href="#why" class="py-3">ทำไมต้องเรา</a><a href="#contact" class="py-3">ติดต่อเรา</a><button data-acc="up" data-guest class="py-3 text-left">สมัครสมาชิก</button><button data-acc="in" data-guest class="py-3 text-left">เข้าสู่ระบบ</button><button data-acc="me" data-me class="py-3 text-left">บัญชี: <span class="uname"></span></button><button data-top data-me class="py-3 text-left">เติมเงิน (฿<span class="bal">0</span>)</button>
   </nav>
 </header>
 
@@ -89,7 +90,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
       <a href="#why" class="btn o">ทำไมต้องเรา</a>
     </div>
     <div class="mt-5 flex justify-center gap-3" data-guest><button data-acc="up" class="mb f">สมัครสมาชิก</button><button data-acc="in" class="mb">เข้าสู่ระบบ</button></div>
-    <div class="mt-5 flex justify-center" data-me><button data-acc="me" class="mb max-w-full truncate">สวัสดี <span class="uname"></span></button></div>
+    <div class="mt-5 flex flex-wrap justify-center gap-3" data-me><button data-acc="me" class="mb max-w-full truncate">สวัสดี <span class="uname"></span></button><button data-top class="mb f">เติมเงิน · ฿<span class="bal">0</span></button></div>
   </section>
 
   <section id="shop" class="max-w-7xl mx-auto px-4 py-12">
@@ -131,6 +132,19 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   <div class="grid gap-2"><input id="f-n" class="inp" placeholder="ชื่อสินค้า"><input id="f-g" class="inp" list="gl" placeholder="เกม (เช่น Valorant)"><datalist id="gl"></datalist><input id="f-d" class="inp" placeholder="รายละเอียดสั้น ๆ"><input id="f-p" class="inp" type="number" min="0" inputmode="numeric" placeholder="ราคา (บาท)">
    <div class="flex gap-2"><button id="psave" class="btn flex-1 justify-center">บันทึกสินค้า</button><button id="pclr" class="btn o">ล้างฟอร์ม</button></div></div>
   <h3 class="font-semibold mt-6 mb-1">สินค้าทั้งหมด</h3><div id="alist" class="pb-8"></div>
+ </div>
+</div>
+<div id="top" class="fixed inset-0 z-[88] bg-black/80 hidden overflow-y-auto st sb">
+ <div class="max-w-sm mx-auto mt-6 px-4">
+  <div class="bg-cardBg border border-neonRed/40 rounded-xl p-5">
+   <div class="flex items-center justify-between mb-3"><h2 class="text-xl font-bold">เติมเงิน</h2><button id="tclose" class="w-9 h-9 grid place-items-center" aria-label="ปิด"><svg class="ic"><use href="#i-x"/></svg></button></div>
+   <p class="text-sm text-gray-400">ยอดคงเหลือ <b class="text-neonRed text-lg">฿<span class="bal">0</span></b></p>
+   <div class="mt-3 p-3 rounded-lg border border-white/10 text-sm"><div class="text-gray-400">โอนเงินเข้าบัญชี</div><div id="tbank" class="font-semibold mt-1 break-words"></div><button id="tcopy" class="text-sm underline mt-2 text-neonRed">คัดลอกเลขบัญชี</button></div>
+   <ol class="text-sm text-gray-300 mt-3 list-decimal pl-5 grid gap-1"><li>โอนเงินตามยอดที่ต้องการ</li><li>แคปสลิปให้เห็น QR ชัดเจน</li><li>เลือกรูปสลิปด้านล่าง ระบบตรวจและเติมเงินให้อัตโนมัติ</li></ol>
+   <input id="slip" type="file" accept="image/*" class="inp mt-3">
+   <p id="tmsg" class="text-sm min-h-[1.25rem] mt-2"></p>
+   <button id="tsub" class="btn w-full justify-center mt-2">ตรวจสลิปและเติมเงิน</button>
+  </div>
  </div>
 </div>
 <div id="auth" class="fixed inset-0 z-[88] bg-black/80 hidden overflow-y-auto st sb">
@@ -214,7 +228,7 @@ const SB_URL='https://rpwsleluxqghejqyyzdv.supabase.co',SB_KEY='sb_publishable_5
 let sb=null,me=null,mode='up';
 try{if(SB_URL&&SB_KEY)sb=supabase.createClient(SB_URL,SB_KEY)}catch(e){}
 const uname=()=>me?.user_metadata?.username||(me?.email||'').split('@')[0],F=['a-name','a-mail','a-pw','a-pw2'].map(k=>$('#'+k)),th=s=>/already/i.test(s)?'อีเมลนี้สมัครไปแล้ว':/invalid login/i.test(s)?'อีเมลหรือรหัสผ่านไม่ถูกต้อง':/rate limit/i.test(s)?'ลองใหม่อีกครั้งในอีกสักครู่':'ทำรายการไม่สำเร็จ ลองใหม่อีกครั้ง';
-function accUI(){document.body.classList.toggle('in',!!me);document.querySelectorAll('.uname').forEach(e=>e.textContent=me?uname():'')}
+function accUI(){document.body.classList.toggle('in',!!me);document.querySelectorAll('.uname').forEach(e=>e.textContent=me?uname():'');loadBal()}
 function amode(m){mode=m;const up=m=='up',my=m=='me';
 $('#atitle').textContent=up?'สมัครสมาชิก':my?'บัญชีของคุณ':'เข้าสู่ระบบ';
 F[0].style.display=up?'':'none';F[1].style.display=F[2].style.display=my?'none':'';F[3].style.display=up?'':'none';
@@ -240,6 +254,27 @@ if(!data.session)return m.textContent='สมัครแล้ว กรุณ�
 F.forEach(x=>x.value='');ao(0);toast('ยินดีต้อนรับ')
 }catch(e){m.textContent=th(String(e.message))}};
 if(sb){sb.auth.getSession().then(({data})=>{me=data.session?.user||null;accUI()});sb.auth.onAuthStateChange((_e,s)=>{me=s?.user||null;accUI()})}else document.body.classList.add('nosb');
+const SHOP={bank:'ธนาคารกรุงไทย',no:'8510825300',show:'851-0-82530-0',name:'อรยา ศิริบุตร'};
+let bal=0;
+if(!SHOP.no)document.body.classList.add('notop');
+$('#tbank').textContent=[SHOP.bank,SHOP.show||SHOP.no,SHOP.name?'('+SHOP.name+')':''].join(' ');
+async function loadBal(){bal=0;if(sb&&me){try{const{data}=await sb.from('wallets').select('balance').eq('user_id',me.id).maybeSingle();bal=Number(data?.balance||0)}catch(e){}}
+document.querySelectorAll('.bal').forEach(e=>e.textContent=bal.toLocaleString('th-TH'))}
+const topMsg=(t,c)=>{const m=$('#tmsg');m.textContent=t;m.className='text-sm min-h-[1.25rem] mt-2 '+(c||'text-neonRed')};
+document.querySelectorAll('[data-top]').forEach(b=>b.onclick=()=>{topMsg('');$('#top').classList.remove('hidden')});
+$('#tclose').onclick=()=>$('#top').classList.add('hidden');
+$('#tcopy').onclick=async()=>{try{await navigator.clipboard.writeText(SHOP.no);topMsg('คัดลอกเลขบัญชีแล้ว','text-green-400')}catch(e){topMsg('คัดลอกไม่ได้ กดค้างที่เลขบัญชีเพื่อคัดลอกเอง','text-gray-300')}};
+function pack(file){return new Promise((ok,no)=>{const im=new Image(),u=URL.createObjectURL(file);im.onload=()=>{const k=Math.min(1,1600/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);ok(c.toDataURL('image/jpeg',.85).split(',')[1])};im.onerror=()=>no(new Error('img'));im.src=u})}
+$('#tsub').onclick=async()=>{const f=$('#slip').files[0];
+if(!me||!sb)return topMsg('กรุณาเข้าสู่ระบบก่อน');
+if(!f)return topMsg('เลือกรูปสลิปก่อน');
+$('#tsub').disabled=true;topMsg('กำลังตรวจสลิป...','text-gray-300');
+try{const image=await pack(f);const{data,error}=await sb.functions.invoke('verify-slip',{body:{image}});
+if(error)throw error;
+if(data&&data.ok){topMsg('เติมเงินสำเร็จ +฿'+data.amount,'text-green-400');$('#slip').value='';await loadBal()}
+else topMsg((data&&data.error)||'เติมเงินไม่สำเร็จ')
+}catch(e){topMsg('ระบบเติมเงินยังไม่พร้อมใช้งาน ลองใหม่ภายหลัง')}
+$('#tsub').disabled=false};
 (async()=>{try{const u=await claude.use('user');db=await claude.use('db');if(!db)return;
 if(u&&await u.canEdit()){adm=true;$('#admBtn').classList.remove('hidden')}
 db.collection('products').onSnapshot(s=>{P=s.docs.map(d=>mk(d.data(),d.id)).sort((a,b)=>b.o-a.o);refresh()},()=>{});
